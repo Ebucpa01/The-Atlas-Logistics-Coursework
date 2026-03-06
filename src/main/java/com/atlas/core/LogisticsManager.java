@@ -3,6 +3,11 @@ package com.atlas.core;
 import java.util.List;
 import com.atlas.models.Shipment;
 
+import com.atlas.models.Shipment;
+import com.atlas.strategies.FragileShipping;
+import com.atlas.strategies.StandartShipping;
+import com.atlas.strategies.ExpressShipping;
+
 // Some boilerplate code needs to be generated.
 
 public class LogisticsManager {
