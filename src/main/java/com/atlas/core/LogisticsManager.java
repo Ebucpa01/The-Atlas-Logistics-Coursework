@@ -1,71 +1,55 @@
 package com.atlas.core;
 
+import java.util.ArrayList;
 import java.util.List;
-import com.atlas.models.Shipment;
 
-//import project classes from other packages
 import com.atlas.models.Shipment;
-import com.atlas.strategies.FragileShipping;
-import com.atlas.strategies.StandartShipping;
 import com.atlas.strategies.ExpressShipping;
-
-// Some boilerplate code needs to be generated.
+import com.atlas.strategies.FragileShipping;
+import com.atlas.strategies.StandardShipping;
 
 public class LogisticsManager {
+
     private List<Shipment> masterShipmentList;
 
-    public class LogisticsManager{
-        //Master list that stores all shipment in the system
-        private List<Shipment> masterShipmentList;
+    public LogisticsManager() {
+        this.masterShipmentList = new ArrayList<>();
+    }
 
-        public LogisticManager(){
-            this.masterShipmentList = new ArrayList<>();
-        }
+    public void addShipment(Shipment shipment) {
+        masterShipmentList.add(shipment);
+    }
 
-        //adds a new shipment to the master shipment list
+    public List<Shipment> getMasterShipmentList() {
+        return masterShipmentList;
+    }
 
-        public void addShipment(Shipment shipment){
-            masterShipmentList.add(shipment);
-        }
+    public double calculateSingleCost(Shipment shipment) {
+        String type = shipment.getType();
 
-        // returns the list of shipment
-        public List<Shipment> getMasterShipmentList(){
-            return masterShipmentList;
-        }
-
-        /* The method checks the shipment type and select 
-         *the right shipping strategy to calculate the price.
-         */
-
-        public double calculateSingleCost(Shipment shipment){
-          String type = shipment.getType();
-        
-            //express shipping straregy
-            if (type.equalsIgnoreCase("Express")){
-                return new ExpressShipping().calculateCost(shipment)
-            
-            //standard shipping strategy
-            } else if (type.equalsIgnoreCase("Standard")){
-                return new StandartShipping().calculateCost(shipment);
-
-            //fragile shipping strategy 
-            }else if(type.equalsIgnoreCase("Fragile")){
-                retur ner FragileShipping().calculateCost(shipment);
-
-            //if the type is unknown throw an error    
-            }else{
-                throw new IllegalArgumentException("Unknown shipment type ");
-            }
-            }
+        if (type.equalsIgnoreCase("Express")) {
+            return new ExpressShipping().calculateCost(shipment);
+        } else if (type.equalsIgnoreCase("Standard")) {
+            return new StandardShipping().calculateCost(shipment);
+        } else if (type.equalsIgnoreCase("Fragile")) {
+            return new FragileShipping().calculateCost(shipment);
+        } else {
+            throw new IllegalArgumentException("Unknown shipment type: " + type);
         }
     }
 
-    /**
-     * MLO8: Use of Streams to filter and aggregate data.
-     * Find the total weight of all shipments for a specific destination.
-     */
+    public List<String> getUniqueDestinationsSorted() {
+        return masterShipmentList.stream()
+                .map(Shipment::getDestination)
+                .distinct()
+                .sorted()
+                .toList();
+    }
+
     public double getTotalWeightForDestination(String city) {
-        //TODO
-        return 0.0;
+        return masterShipmentList.stream()
+                .filter(s -> s.getDestination().equalsIgnoreCase(city))
+                .mapToDouble(Shipment::getWeight)
+                .sum();
     }
 }

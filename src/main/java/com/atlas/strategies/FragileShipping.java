@@ -1,6 +1,6 @@
 package com.atlas.strategies;
 
-import com.atlas.inerfaces.ShippingStrategy;
+import com.atlas.interfaces.ShippingStrategy;
 import com.atlas.models.Shipment;
 
 public class FragileShipping implements ShippingStrategy {
@@ -11,6 +11,6 @@ public class FragileShipping implements ShippingStrategy {
             throw new IllegalArgumentException("Fragile weight must be under 50kg");
         }
         double baseCost = (shipment.getWeight()* 0.50) + (shipment.getDistance()*0.10);
-        return (baseCost * 1.2) + 20.0
+        return (baseCost * 1.2) + 20.0;
     }
 }
