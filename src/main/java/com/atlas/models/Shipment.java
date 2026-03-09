@@ -1,12 +1,16 @@
 package com.atlas.models;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Value
+@Getter
+@AllArgsConstructor
 public class Shipment {
-    String name;
-    double weight;
-    double distance;
-    String destination;
-    String type;
+
+    private String name;
+    private double weight;
+    private double distance;
+    private String destination;
+    private String type;
+
 }
