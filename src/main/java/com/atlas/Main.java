@@ -10,7 +10,7 @@ public class Main {
         //AuditLogger logger = AuditLogger.getInstance();
         LogisticsManager manager = new LogisticsManager();
 
-        log.info("System initialized using Interface-Driven Strategy architecture.");
+        System.out.println("System initialized using Interface-Driven Strategy architecture.");
 
         // Sample Data Entry
         manager.addShipment(new Shipment("Medical Kit", 5.0, 200.0, "London", "Express"));
@@ -28,6 +28,6 @@ public class Main {
             System.out.printf("[%s] -> %-10s | Cost: £%7.2f%n", s.getType(), s.getName(), cost);
         });
 
-        log.info("Analysis complete. All billing calculated via Strategy delegates.");
+        System.out.println("Analysis complete. All billing calculated via Strategy delegates.");
     }
 }

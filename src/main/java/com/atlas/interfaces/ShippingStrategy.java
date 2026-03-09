@@ -25,6 +25,6 @@ public interface ShippingStrategy {
      */
     default double addProcessingFee(double baseCost) {
         // the tests indicate what this method needs to return
-        return 0.0;
+        return 5.0;
     }
 }

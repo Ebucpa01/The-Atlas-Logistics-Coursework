@@ -11,7 +11,7 @@ public class ExpressShipping implements ShippingStrategy {
         double baseCost = (shipment.getWeight()* 0.5)+ (shipment.getDistance()*0.1);
         double expressCost = baseCost * 1.75;
 
-        return addProcessingFee(expressCost);
+        return expressCost + addProcessingFee(expressCost);
     }
 }
 
