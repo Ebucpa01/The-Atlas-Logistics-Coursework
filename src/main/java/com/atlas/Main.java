@@ -21,7 +21,7 @@ public class Main {
         System.out.println("\n--- ATLAS LOGISTICS DASHBOARD ---");
         System.out.printf("Total Shipments: %d%n", manager.getMasterShipmentList().size());
         System.out.printf("Unique Cities:   %s%n", manager.getUniqueDestinationsSorted());
-
+        // print shipping cost
         System.out.println("\n--- DETAILED BILLING ---");
         manager.getMasterShipmentList().forEach(s -> {
             double cost = manager.calculateSingleCost(s);
